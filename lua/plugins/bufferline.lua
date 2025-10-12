@@ -19,7 +19,7 @@ return {
         right_trunc_marker = '',
         max_name_length = 30,
         max_prefix_length = 30, -- prefix used when a buffer is de-duplicated
-        tab_size = 21,
+        tab_size = 28,
         diagnostics = false,
         diagnostics_update_in_insert = false,
         color_icons = true,
@@ -43,11 +43,13 @@ return {
       },
       highlights = {
         separator = {
-          fg = '#434C5E',
+          fg = '#ffffff',
         },
         buffer_selected = {
           bold = true,
           italic = false,
+          fg = '#02f000',
+          color_icons = true,
         },
         -- separator_selected = {},
         -- tab_selected = {},
