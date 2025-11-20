@@ -9,17 +9,17 @@ return {
       -- Available options:
       -- "modern", "classic", "minimal", "powerline",
       -- "ghost", "simple", "nonerdfont", "amongus"
-      preset = 'classic',
+      preset = 'minimal',
 
-      transparent_bg = true, -- Set the background of the diagnostic to transparent
+      transparent_bg = true,          -- Set the background of the diagnostic to transparent
       transparent_cursorline = false, -- Set the background of the cursorline to transparent (only one the first diagnostic)
 
       hi = {
         error = 'DiagnosticError', -- Highlight group for error messages
-        warn = 'DiagnosticWarn', -- Highlight group for warning messages
-        info = 'DiagnosticInfo', -- Highlight group for informational messages
-        hint = 'DiagnosticHint', -- Highlight group for hint or suggestion messages
-        arrow = 'NonText', -- Highlight group for diagnostic arrows
+        warn = 'DiagnosticWarn',   -- Highlight group for warning messages
+        info = 'DiagnosticInfo',   -- Highlight group for informational messages
+        hint = 'DiagnosticHint',   -- Highlight group for hint or suggestion messages
+        arrow = 'NonText',         -- Highlight group for diagnostic arrows
 
         -- Background color for diagnostics
         -- Can be a highlight group or a hexadecimal color (#RRGGBB)
@@ -50,7 +50,7 @@ return {
         -- Time (in milliseconds) to throttle updates while moving the cursor
         -- Increase this value for better performance if your computer is slow
         -- or set to 0 for immediate updates and better visual
-        throttle = 20,
+        throttle = 0,
 
         -- Minimum message length before wrapping to a new line
         softwrap = 30,
@@ -121,7 +121,7 @@ return {
 
         -- Filter diagnostics by severity
         -- Available severities:
-        -- vim.diagnostic.severity.ERROR
+        -- vim.diagnostic.severity.ERROR,
         -- vim.diagnostic.severity.WARN
         -- vim.diagnostic.severity.INFO
         -- vim.diagnostic.severity.HINT

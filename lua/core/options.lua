@@ -11,7 +11,7 @@ vim.opt.shiftwidth = 2 -- The number of spaces inserted for each indentation (de
 vim.opt.tabstop = 2 -- Insert n spaces for a tab (default: 8)
 vim.o.softtabstop = 2 -- Number of spaces that a tab counts for while performing editing operations (default: 0)
 vim.o.expandtab = true -- Convert tabs to spaces (default: false)
-vim.o.scrolloff = 15 -- Minimal number of screen lines to keep above and below the cursor (default: 0)
+vim.o.scrolloff = 5 -- Minimal number of screen lines to keep above and below the cursor (default: 0)
 vim.o.sidescrolloff = 8 -- Minimal number of screen columns either side of cursor if wrap is `false` (default: 0)
 vim.o.cursorline = true -- Highlight the current line (default: false)
 vim.o.splitbelow = true -- Force all horizontal splits to go below current window (default: false)
@@ -41,10 +41,10 @@ vim.opt.shortmess:append 'c' -- Don't give |ins-completion-menu| messages (defau
 vim.opt.iskeyword:append '-' -- Hyphenated words recognized by searches (default: does not include '-')
 vim.opt.formatoptions:remove { 'c', 'r', 'o' } -- Don't insert the current comment leader automatically for auto-wrapping comments using 'textwidth', hitting <Enter> in insert mode, or hitting 'o' or 'O' in normal mode. (default: 'croql')
 vim.opt.runtimepath:remove '/usr/share/vim/vimfiles' -- Separate Vim plugins from Neovim in case Vim still in use (default: includes this path if Vim is installed)
-vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = '#00FF00' }) -- Grønn for 'added'
-vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = '#FFFF00' }) -- Gul for 'changed'
-vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = '#FF0000' }) -- Rød for 'deleted'
-vim.api.nvim_set_hl(0, 'GitSignsTopdelete', { fg = '#FF4500' }) -- Oransje for 'topdelete'
-vim.api.nvim_set_hl(0, 'GitSignsChangedelete', { fg = '#FF1493' }) -- Rosa for 'changedelete'
-vim.api.nvim_set_hl(0, 'GitSignsUntracked', { fg = '#1E90FF' }) -- Blå for 'untracked'
-vim.opt.guicursor = 'n:blinkon100,i:ver100-blinkon1000,c:ver100'
+vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = '#00FF00' })
+vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = '#FFFF00' })
+vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = '#FF0000' })
+vim.api.nvim_set_hl(0, 'GitSignsTopdelete', { fg = '#FF4500' })
+vim.api.nvim_set_hl(0, 'GitSignsChangedelete', { fg = '#FF1493' })
+vim.api.nvim_set_hl(0, 'GitSignsUntracked', { fg = '#1E90FF' })
+vim.opt.guicursor = 'n-v-c:block-blinkon1000-blinkoff1000,i:ver25-blinkon1000-blinkoff1000'
