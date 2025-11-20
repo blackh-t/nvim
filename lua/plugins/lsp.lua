@@ -131,7 +131,7 @@ return {
                 unpack(vim.api.nvim_get_runtime_file('', true)),
               },
             },
-            diagnostics = { disable = { 'missing-fields' } },
+            diagnostics = { globals = { 'vim' }, disable = { 'missing-fields' } },
             format = { enable = false },
           },
         },
@@ -166,35 +166,35 @@ return {
     -- 3. MANUAL SERVER SETUP (Not in Mason)
     -- =========================================================================
     -- We require lspconfig here specifically for manual setup
-    local lspconfig = require 'lspconfig'
-
+    -- local lspconfig = vim.lsp.config
+    --
     -- CCLS
-    lspconfig.ccls.setup {
-      capabilities = capabilities,
-      init_options = { compilationDatabasePath = '.', documentFormatting = true },
-      on_attach = function(client, bufnr)
-        if client.server_capabilities.documentFormattingProvider then
-          vim.api.nvim_create_autocmd('BufWritePre', {
-            group = vim.api.nvim_create_augroup('LspFormatting', { clear = true }),
-            buffer = bufnr,
-            callback = function()
-              vim.lsp.buf.format { async = false }
-            end,
-          })
-        end
-      end,
-    }
-
-    -- DartLS
-    lspconfig.dartls.setup {
-      capabilities = capabilities,
-      settings = {
-        dart = {
-          analyzerExcludedFolders = {
-            vim.fn.expand '$HOME/development/flutter/',
-          },
-        },
-      },
-    }
+    --   lspconfig.ccls.setup {
+    --     capabilities = capabilities,
+    --     init_options = { compilationDatabasePath = '.', documentFormatting = true },
+    --     on_attach = function(client, bufnr)
+    --       if client.server_capabilities.documentFormattingProvider then
+    --         vim.api.nvim_create_autocmd('BufWritePre', {
+    --           group = vim.api.nvim_create_augroup('LspFormatting', { clear = true }),
+    --           buffer = bufnr,
+    --           callback = function()
+    --             vim.lsp.buf.format { async = false }
+    --           end,
+    --         })
+    --       end
+    --     end,
+    --   }
+    --
+    --   -- DartLS
+    --   lspconfig.dartls.setup {
+    --     capabilities = capabilities,
+    --     settings = {
+    --       dart = {
+    --         analyzerExcludedFolders = {
+    --           vim.fn.expand '$HOME/development/flutter/',
+    --         },
+    --       },
+    --     },
+    --   }
   end,
 }
