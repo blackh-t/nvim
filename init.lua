@@ -1,6 +1,10 @@
 require("core.options")
 require("core.keymaps")
 --require("core.snippets")
+local ts_lang = vim.treesitter.language
+if not ts_lang.ft_to_lang then
+	ts_lang.ft_to_lang = ts_lang.get_lang
+end
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -23,23 +27,22 @@ vim.opt.rtp:prepend(lazypath)
 --    :Lazy update
 --
 -- NOTE: Here is where you install your plugins.
+-- 4. Load Plugins
 require("lazy").setup({
+	require("plugins.snacks"),
 	require("plugins.neotree"),
-	require("plugins.colortheme2"),
+	require("plugins.theme4"),
 	require("plugins.bufferline"),
 	require("plugins.treesitter"),
 	require("plugins.lualine"),
-	require("plugins.telescore"),
+	require("plugins.telescore"), -- Make sure this file exists (typo? usually 'telescope')
 	require("plugins.lsp"),
 	require("plugins.autocompletion"),
 	require("plugins.gitsigns"),
-	-- require("plugins.alpha"),
-	require("plugins.none-ls"),
 	require("plugins.misc"),
 	require("plugins.indent-blankline"),
-	require("plugins.flutter"),
-	-- require("plugins.rustfm"),
+	-- require("plugins.flutter"),
 	require("plugins.treesitter-context"),
-	require("plugins.tiny-dianostic"),
-	require("plugins.snacks"),
+	require("plugins.tiny-dianostic"), -- Check spelling: usually 'tiny-diagnostic'
+	require("plugins.none-ls"),
 })

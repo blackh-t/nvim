@@ -44,7 +44,15 @@ return {
             end,
           })
         end
-
+        -- Auto format for JavaScript / TypeScript
+        if client and (client.name == 'ts_ls' or client.name == 'vtsls' or client.name == 'eslint') then
+          vim.api.nvim_create_autocmd('BufWritePre', {
+            buffer = event.buf,
+            callback = function()
+              vim.lsp.buf.format { async = false }
+            end,
+          })
+        end
         -- Highlight references on CursorHold
         if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
           local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
@@ -70,11 +78,13 @@ return {
         end
 
         -- Toggle Inlay Hints
-        if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-          map('<leader>th', function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-          end, '[T]oggle Inlay [H]ints')
-        end
+if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+  map('<leader>th', function()
+    -- Toggle ONLY for the current buffer
+    local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf })
+    vim.lsp.inlay_hint.enable(not is_enabled, { bufnr = event.buf })
+  end, '[T]oggle Inlay [H]ints')
+end
       end,
     })
 
