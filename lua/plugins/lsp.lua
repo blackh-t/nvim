@@ -54,7 +54,7 @@ return {
           })
         end
         -- Highlight references on CursorHold
-        if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+        if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
           local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             buffer = event.buf,
@@ -78,13 +78,13 @@ return {
         end
 
         -- Toggle Inlay Hints
-if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-  map('<leader>th', function()
-    -- Toggle ONLY for the current buffer
-    local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf })
-    vim.lsp.inlay_hint.enable(not is_enabled, { bufnr = event.buf })
-  end, '[T]oggle Inlay [H]ints')
-end
+        if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+          map('<leader>th', function()
+            -- Toggle ONLY for the current buffer
+            local is_enabled = vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }
+            vim.lsp.inlay_hint.enable(not is_enabled, { bufnr = event.buf })
+          end, '[T]oggle Inlay [H]ints')
+        end
       end,
     })
 

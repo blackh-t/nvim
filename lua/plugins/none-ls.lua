@@ -2,7 +2,7 @@ return {
   'nvimtools/none-ls.nvim',
   dependencies = {
     'nvimtools/none-ls-extras.nvim',
-    'jayp0521/mason-null-ls.nvim', 
+    'jayp0521/mason-null-ls.nvim',
   },
   config = function()
     local null_ls = require 'null-ls'
@@ -19,7 +19,7 @@ return {
         'checkmake',
         'ruff',
       },
-      automatic_installation = true, 
+      automatic_installation = true,
     }
 
     local sources = {
@@ -34,11 +34,11 @@ return {
     }
 
     local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
-    
+
     null_ls.setup {
       sources = sources,
       on_attach = function(client, bufnr)
-        if client.supports_method 'textDocument/formatting' then
+        if client:supports_method 'textDocument/formatting' then
           vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
           vim.api.nvim_create_autocmd('BufWritePre', {
             group = augroup,
