@@ -96,24 +96,6 @@ return {
     -- 1. MASON MANAGED SERVERS (Auto-Installed)
     -- =========================================================================
     local servers = {
-      rust_analyzer = {
-        settings = {
-          ['rust_analyzer'] = {
-            cargo = {
-              allFeatures = true,
-              loadOutDirsFromCheck = true,
-              runBuildScripts = true,
-            },
-            checkOnSave = {
-              command = 'clippy',
-              args = { '--', '-D', 'warnings' },
-            },
-            procMacro = {
-              enable = true,
-            },
-          },
-        },
-      },
       ts_ls = {},
       ruff = {},
       pylsp = {
@@ -176,6 +158,7 @@ return {
 
     -- Gather all server names from the table above
     local ensure_installed = vim.tbl_keys(servers or {})
+    table.insert(ensure_installed, 'rust-analyzer')
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
     -- Setup handlers for Mason-managed LSPs

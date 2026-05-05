@@ -40,7 +40,7 @@ require("lazy").setup({
 	require("plugins.lualine"),
 	require("plugins.telescope"),
 	require("plugins.lsp"),
-	require("plugins.rust-tools"),
+	require("plugins.rustaceanvim"),
 	require("plugins.autocompletion"),
 	require("plugins.gitsigns"),
 	require("plugins.misc"),
