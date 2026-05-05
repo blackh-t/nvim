@@ -99,9 +99,18 @@ return {
       rust_analyzer = {
         settings = {
           ['rust_analyzer'] = {
-            cargo = { allFeatures = false },
-            checkOnSave = { command = 'clippy' },
-            rustfmt = { overrideCommand = { 'rustfmt', '--edition', '2021' } },
+            cargo = {
+              allFeatures = true,
+              loadOutDirsFromCheck = true,
+              runBuildScripts = true,
+            },
+            checkOnSave = {
+              command = 'clippy',
+              args = { '--', '-D', 'warnings' },
+            },
+            procMacro = {
+              enable = true,
+            },
           },
         },
       },
@@ -120,6 +129,18 @@ return {
               pylint = { enabled = false },
               mccabe = { enabled = false },
               pydocstyle = { enabled = false },
+            },
+          },
+        },
+      },
+      pyright = {
+        settings = {
+          python = {
+            analysis = {
+              typeCheckingMode = 'basic',
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+              diagnosticMode = 'workspace',
             },
           },
         },

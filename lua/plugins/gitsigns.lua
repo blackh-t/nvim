@@ -1,6 +1,7 @@
 -- Adds git related signs to the gutter, as well as utilities for managing changes
 return {
   'lewis6991/gitsigns.nvim',
+  event = 'VeryLazy',
   opts = {
     signs = {
       add = { text = '┃', hl = 'GitSignsAdd' },
@@ -104,4 +105,12 @@ return {
       map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
     end,
   },
+  config = function()
+    vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = '#00FF00' })
+    vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = '#FFFF00' })
+    vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = '#FF0000' })
+    vim.api.nvim_set_hl(0, 'GitSignsTopdelete', { fg = '#FF4500' })
+    vim.api.nvim_set_hl(0, 'GitSignsChangedelete', { fg = '#FF1493' })
+    vim.api.nvim_set_hl(0, 'GitSignsUntracked', { fg = '#1E90FF' })
+  end,
 }

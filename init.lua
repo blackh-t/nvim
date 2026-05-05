@@ -1,3 +1,4 @@
+-- Treesitter language compatibility shim (neovim 0.10+)
 require("core.options")
 require("core.keymaps")
 --require("core.snippets")
@@ -7,7 +8,7 @@ if not ts_lang.ft_to_lang then
 end
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
+if vim.fn.isdirectory(lazypath) == 0 then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
 	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
 	if vim.v.shell_error ~= 0 then
@@ -30,19 +31,23 @@ vim.opt.rtp:prepend(lazypath)
 -- 4. Load Plugins
 require("lazy").setup({
 	require("plugins.snacks"),
+	require("plugins.copilot"),       -- CopilotChat
+	require("plugins.copilot2"),      -- GitHub Copilot
 	require("plugins.neotree"),
 	require("plugins.theme4"),
 	require("plugins.bufferline"),
 	require("plugins.treesitter"),
 	require("plugins.lualine"),
-	require("plugins.telescore"), -- Make sure this file exists (typo? usually 'telescope')
+	require("plugins.telescope"),
 	require("plugins.lsp"),
+	require("plugins.rust-tools"),
 	require("plugins.autocompletion"),
 	require("plugins.gitsigns"),
 	require("plugins.misc"),
 	require("plugins.indent-blankline"),
 	-- require("plugins.flutter"),
 	require("plugins.treesitter-context"),
-	require("plugins.tiny-dianostic"), -- Check spelling: usually 'tiny-diagnostic'
+	require("plugins.tiny-diagnostic"),
 	require("plugins.none-ls"),
+	require("plugins.vbg"),
 })

@@ -17,7 +17,7 @@ return {
         'eslint_d',
         'shfmt',
         'checkmake',
-        'ruff',
+        'ruff', -- Ruff handles both linting and fast formatting
       },
       automatic_installation = true,
     }
@@ -28,8 +28,15 @@ return {
       formatting.stylua,
       formatting.shfmt.with { args = { '-i', '4' } },
       formatting.terraform_fmt,
+
+      -- Ruff Import Sorting
       require('none-ls.formatting.ruff').with { extra_args = { '--extend-select', 'I' } },
-      require 'none-ls.formatting.ruff_format',
+
+      -- Ruff Code Formatting with Max Line Length
+      require('none-ls.formatting.ruff_format').with {
+        extra_args = { '--line-length', '80' }, -- Change "88" to your preferred width
+      },
+
       formatting.clang_format,
     }
 
@@ -44,7 +51,14 @@ return {
             group = augroup,
             buffer = bufnr,
             callback = function()
-              vim.lsp.buf.format { async = false }
+              vim.lsp.buf.format {
+                bufnr = bufnr,
+                filter = function(c)
+                  -- Only allow null-ls to format to prevent conflicts
+                  return c.name == 'null-ls'
+                end,
+                async = false,
+              }
             end,
           })
         end
