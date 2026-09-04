@@ -40,7 +40,7 @@ return {
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        theme = 'nord', -- Set theme based on environment variable
+        theme = 'auto', -- Follow the active colorscheme (github_dark)
         -- Some useful glyphs:
         -- https://www.nerdfonts./cheat-sheet
         --        

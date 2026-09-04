@@ -35,24 +35,6 @@ return {
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-        -- Auto format for Rust.
-        if client and client.name == 'rust_analyzer' then
-          vim.api.nvim_create_autocmd('BufWritePre', {
-            buffer = event.buf,
-            callback = function()
-              vim.lsp.buf.format { async = false }
-            end,
-          })
-        end
-        -- Auto format for JavaScript / TypeScript
-        if client and (client.name == 'ts_ls' or client.name == 'vtsls' or client.name == 'eslint') then
-          vim.api.nvim_create_autocmd('BufWritePre', {
-            buffer = event.buf,
-            callback = function()
-              vim.lsp.buf.format { async = false }
-            end,
-          })
-        end
         -- Highlight references on CursorHold
         if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
           local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
@@ -115,18 +97,6 @@ return {
           },
         },
       },
-      pyright = {
-        settings = {
-          python = {
-            analysis = {
-              typeCheckingMode = 'basic',
-              autoSearchPaths = true,
-              useLibraryCodeForTypes = true,
-              diagnosticMode = 'workspace',
-            },
-          },
-        },
-      },
       html = { filetypes = { 'html', 'twig', 'hbs' } },
       cssls = {},
       sqlls = {},
@@ -158,13 +128,18 @@ return {
 
     -- Gather all server names from the table above
     local ensure_installed = vim.tbl_keys(servers or {})
-    table.insert(ensure_installed, 'rust-analyzer')
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
     -- Setup handlers for Mason-managed LSPs
     require('mason-lspconfig').setup {
       handlers = {
         function(server_name)
+          -- rust-analyzer is provided by rustaceanvim (plugins/rustaceanvim.lua);
+          -- skip it here so we don't get duplicate clients/diagnostics.
+          -- NOTE: mason-lspconfig uses lspconfig's underscore name: rust_analyzer.
+          if server_name == 'rust_analyzer' then
+            return
+          end
           local server = servers[server_name] or {}
           server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
 

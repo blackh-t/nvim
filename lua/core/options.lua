@@ -42,3 +42,36 @@ vim.opt.iskeyword:append '-' -- Hyphenated words recognized by searches (default
 vim.opt.formatoptions:remove { 'c', 'r', 'o' } -- Don't insert the current comment leader automatically for auto-wrapping comments using 'textwidth', hitting <Enter> in insert mode, or hitting 'o' or 'O' in normal mode. (default: 'croql')
 vim.opt.runtimepath:remove '/usr/share/vim/vimfiles' -- Separate Vim plugins from Neovim in case Vim still in use (default: includes this path if Vim is installed)
 vim.opt.guicursor = 'n-v-c:block-blinkon1000-blinkoff1000,i:ver25-blinkon1000-blinkoff1000'
+
+-- Global used by plugins (e.g. Telescope's web-devicons) to enable Nerd Font icons
+vim.g.have_nerd_font = true
+
+-- Recognize .tfvars so terraformls can enable for the "terraform-vars" filetype.
+vim.filetype.add({ extension = { tfvars = 'terraform-vars' } })
+
+-- Match Copilot's UTF-16 position encoding to silence the LSP mismatch warning.
+vim.g.rustaceanvim = vim.tbl_deep_extend('force', vim.g.rustaceanvim or {}, {
+  server = { offset_encoding = 'utf-16' },
+})
+
+-- Global toggle for auto-format-on-save. Toggled with <leader>fa.
+vim.g.autoformat_on_save = true
+
+-- Auto-format on save for any buffer with a formatting-capable LSP client.
+-- null-ls runs its own formatters (plugins/none-ls.lua), so it is excluded to
+-- avoid running the same formatter twice.
+local format_on_save = vim.api.nvim_create_augroup('format-on-save', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePre', {
+  group = format_on_save,
+  callback = function()
+    if not vim.g.autoformat_on_save then
+      return
+    end
+    vim.lsp.buf.format {
+      async = false,
+      filter = function(client)
+        return client.name ~= 'null-ls'
+      end,
+    }
+  end,
+})

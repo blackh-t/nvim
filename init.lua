@@ -31,8 +31,8 @@ vim.opt.rtp:prepend(lazypath)
 -- 4. Load Plugins
 require("lazy").setup({
 	require("plugins.snacks"),
-	require("plugins.copilot"),       -- CopilotChat
-	require("plugins.copilot2"),      -- GitHub Copilot
+	require("plugins.copilot"), -- CopilotChat
+	require("plugins.copilot2"), -- GitHub Copilot
 	require("plugins.neotree"),
 	require("plugins.theme4"),
 	require("plugins.bufferline"),

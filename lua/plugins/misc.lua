@@ -4,10 +4,9 @@ return {
     -- Tmux & split window navigation
     'christoomey/vim-tmux-navigator',
   },
-  {
-    -- Detect tabstop and shiftwidth automatically
-    'tpope/vim-sleuth',
-  },
+  -- NOTE: vim-sleuth (auto tab detection) removed so new-line indentation is
+  -- always the fixed 2-space width from lua/core/options.lua. Re-add here
+  -- (with 'tpope/vim-sleuth') if you want auto-detected tab sizes.
   {
     -- Powerful Git integration for Vim
     'tpope/vim-fugitive',

@@ -171,7 +171,7 @@ nvim
 | [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim) | File explorer |
 | [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) | LSP client |
 | [mason.nvim](https://github.com/williamboman/mason.nvim) | LSP server installer |
-| [rust-tools.nvim](https://github.com/rust-lang/rust-tools.nvim) | Rust enhancements |
+| [rustaceanvim](https://github.com/mrcjkb/rustaceanvim) | Rust enhancements |
 | [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) | Autocomplete |
 | [luasnip](https://github.com/L3MON4D3/LuaSnip) | Snippets |
 | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git integration |

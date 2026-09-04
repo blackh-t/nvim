@@ -7,7 +7,7 @@ return {
       require('github-theme').setup {
         -- Your custom options go here
         options = {
-          transparent = false,
+          transparent = true,
           styles = {
             comments = 'italic',
           },

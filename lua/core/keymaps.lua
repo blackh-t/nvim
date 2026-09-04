@@ -14,6 +14,13 @@ vim.keymap.set('n', '<C-s>', '<cmd> w <CR>', opts)
 -- save file without auto-formatting
 vim.keymap.set('n', '<leader>sn', '<cmd>noautocmd w <CR>', opts)
 
+-- toggle auto-format-on-save
+vim.keymap.set('n', '<leader>fa', function()
+  vim.g.autoformat_on_save = not vim.g.autoformat_on_save
+  vim.g.rustfmt_autosave = vim.g.autoformat_on_save and 1 or 0
+  vim.notify('Auto-format on save: ' .. (vim.g.autoformat_on_save and 'ON' or 'OFF'), vim.log.levels.INFO)
+end, { desc = 'Toggle auto-format on save' })
+
 -- quit file
 vim.keymap.set('n', '<C-q>', '<cmd> q <CR>', opts)
 
@@ -74,10 +81,10 @@ vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Move lines with Alt+Arrows
-vim.keymap.set('n', 'M-j', ':m .+1<CR>==', { noremap = true, silent = true })
-vim.keymap.set('n', 'M-k', ':m .-2<CR>==', { noremap = true, silent = true })
-vim.keymap.set('v', 'M-j', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
-vim.keymap.set('v', 'M-k', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+vim.keymap.set('n', '<M-j>', ':m .+1<CR>==', { noremap = true, silent = true })
+vim.keymap.set('n', '<M-k>', ':m .-2<CR>==', { noremap = true, silent = true })
+vim.keymap.set('v', '<M-j>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+vim.keymap.set('v', '<M-k>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 
 -- Show FNs
 vim.keymap.set('n', '<leader>sfn', '<cmd>Telescope lsp_document_symbols<CR>', { desc = 'Se funksjoner med LSP' })

@@ -33,6 +33,14 @@ return { -- Autocompletion
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
+
+    -- Lua module completions for `vim` and Neovim runtime files (feeds the `lazydev` source)
+    {
+      'folke/lazydev.nvim',
+      config = function()
+        require('lazydev').setup()
+      end,
+    },
   },
   config = function()
     -- See `:help cmp`

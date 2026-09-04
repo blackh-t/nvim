@@ -1,0 +1,5 @@
+# Rustfmt configuration referenced by rust-analyzer via --config-path.
+# Guarantees 2-space indentation for on-save formatting (Ctrl-S / :w),
+# independent of project root or rustfmt.toml discovery.
+tab_spaces = 2
+hard_tabs = false

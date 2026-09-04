@@ -51,6 +51,9 @@ return {
             group = augroup,
             buffer = bufnr,
             callback = function()
+              if not vim.g.autoformat_on_save then
+                return
+              end
               vim.lsp.buf.format {
                 bufnr = bufnr,
                 filter = function(c)
