@@ -34,7 +34,6 @@ require("lazy").setup({
 	require("plugins.copilot"), -- CopilotChat
 	require("plugins.copilot2"), -- GitHub Copilot
 	require("plugins.neotree"),
-	require("plugins.theme4"),
 	require("plugins.bufferline"),
 	require("plugins.treesitter"),
 	require("plugins.lualine"),
